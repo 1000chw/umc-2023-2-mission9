@@ -1,0 +1,81 @@
+openapi: 3.1.0
+info:
+  title: API Title
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:3000/'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+  responses:
+    successResponse:
+      description: successful request with no data
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              status: 200
+              isSuccess: true
+              code: 1000
+              message: OK
+    BadRequest:
+      description: 잘못된 요청
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            isSuccess: true
+            code: 3000
+            message: invalid request
+    InternalServerError:
+      description: 서버 에러
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 500
+            isSuccess: true
+            code: 4000
+            message: server error
+paths:
+  /stores:
+    post:
+      tags:
+        - Stores
+      summary: 가게 저장하기
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                placeId:
+                  type: integer
+                  description: 지역 ID
+                name:
+                  type: string
+                  description: 가게 이름
+                type:
+                  type: string
+                  description: 가게 분류
+                address:
+                  type: string
+                  description: 가게 주소
+      responses:
+        '200':
+          $ref: '#/components/responses/successResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'

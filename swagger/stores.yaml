@@ -1,0 +1,32 @@
+/stores:
+    post:
+        tags:
+            - Stores
+        summary: 가게 저장하기
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            placeId:
+                                type: integer
+                                description: 지역 ID
+                            name:
+                                type: string
+                                description: 가게 이름
+                            type:
+                                type: string
+                                description: 가게 분류
+                            address:
+                                type: string
+                                description: 가게 주소
+
+        responses:
+            "200":
+                $ref: "./openapi.yaml#/components/responses/successResponse"
+            "400":
+                $ref: "./openapi.yaml#/components/responses/BadRequest"
+            "500":
+                $ref: "./openapi.yaml#/components/responses/InternalServerError"

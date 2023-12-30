@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/health", (req, res) => {
-    res.status(200).send("good!");
+    res.status(200).send("good!!!!!");
 });
 
 app.use("/stores", storesRouter);
